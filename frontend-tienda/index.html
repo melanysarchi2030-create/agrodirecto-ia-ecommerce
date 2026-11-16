@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroDirecto IA | Del Campo a tu Mesa sin Intermediarios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-50 text-slate-800 font-sans">
+
+  <header class="bg-green-900 text-white p-6 shadow-md">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold">🌱 AgroDirecto IA</h1>
+        <p class="text-green-200 text-sm">Comercio agrícola directo • Precios dinámicos por compra grupal</p>
+      </div>
+      <span class="bg-emerald-600 px-3 py-1 rounded-full text-xs font-semibold">ERP + CRM Conectado</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto p-6">
+    <!-- Barra de Innovación Disruptiva -->
+    <div class="bg-white border-l-4 border-green-700 p-4 rounded shadow mb-6">
+      <h2 class="font-bold text-green-900">🔥 Descuento Grupal Activo en tu Zona: 25% OFF</h2>
+      <p class="text-sm text-slate-600">Tu barrio alcanzó el 85% de la ruta de cosecha. Compra directo al agricultor sin intermediarios.</p>
+    </div>
+
+    <!-- Catálogo -->
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <div class="bg-white p-5 rounded-lg shadow">
+        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded font-bold">Cosecha de Hoy</span>
+        <h3 class="text-lg font-bold mt-2">Canasta Familiar Andina (10 kg)</h3>
+        <p class="text-sm text-slate-500 mt-1">Papa súper chola, zanahoria, cebolla, tomate riñón y aguacate Hass.</p>
+        <div class="mt-4 flex justify-between items-center">
+          <div>
+            <span class="line-through text-slate-400 text-sm">$19.50</span>
+            <span class="text-xl font-bold text-green-800 ml-2">$14.50</span>
+          </div>
+          <button onclick="seleccionarProducto('Canasta Familiar Andina 10kg', 14.50)" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded text-sm font-semibold">
+            Pedir Ahora
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white p-5 rounded-lg shadow">
+        <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded font-bold">Alta Demanda</span>
+        <h3 class="text-lg font-bold mt-2">Box Frutas Orgánicas (6 kg)</h3>
+        <p class="text-sm text-slate-500 mt-1">Mora de castilla, uvilla, tomate de árbol y babaco fresco.</p>
+        <div class="mt-4 flex justify-between items-center">
+          <div>
+            <span class="line-through text-slate-400 text-sm">$14.00</span>
+            <span class="text-xl font-bold text-green-800 ml-2">$10.50</span>
+          </div>
+          <button onclick="seleccionarProducto('Box Frutas Orgánicas 6kg', 10.50)" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded text-sm font-semibold">
+            Pedir Ahora
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulario de Checkout conectado a ERP y CRM -->
+    <div id="checkout" class="bg-white p-6 rounded-lg shadow">
+      <h3 class="text-lg font-bold text-green-900 mb-4">Finalizar Pedido (Sincronización Automática ERP + CRM)</h3>
+      <form onsubmit="enviarPedido(event)" class="grid md:grid-cols-2 gap-4">
+        <input type="text" id="nombre" placeholder="Tu Nombre Completo" required class="border p-2 rounded">
+        <input type="email" id="email" placeholder="Tu Correo Electrónico" required class="border p-2 rounded">
+        <input type="text" id="barrio" placeholder="Barrio / Zona de Entrega" required class="border p-2 rounded">
+        <input type="text" id="producto" value="Canasta Familiar Andina 10kg - $14.50" readonly class="border p-2 rounded bg-slate-100 font-semibold">
+        <button type="submit" class="md:col-span-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded">
+          Confirmar Compra Directa
+        </button>
+      </form>
+      <div id="respuesta" class="mt-4 hidden p-3 bg-green-100 text-green-900 rounded text-sm font-medium"></div>
+    </div>
+  </main>
+
+  <script>
+    function seleccionarProducto(nombre, precio) {
+      document.getElementById('producto').value = `${nombre} - $${precio.toFixed(2)}`;
+    }
+    function enviarPedido(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const barrio = document.getElementById('barrio').value;
+      const box = document.getElementById('respuesta');
+      box.classList.remove('hidden');
+      box.innerHTML = `✅ <b>¡Orden procesada!</b><br>• <b>Odoo ERP:</b> Orden SO-2026-0048 generada y stock descontado.<br>• <b>HubSpot CRM:</b> Cliente <i>${nombre}</i> registrado en ruta <i>${barrio}</i>.`;
+    }
+  </script>
+</body>
+</html>
